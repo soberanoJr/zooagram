@@ -1,16 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { mongoDbConnect } from '../../middlewares/mongoDbConnect'
+import { messagePatterns } from '../../types/messagePatterns'
 
-export default (
+const loginEndpoint =(
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse<messagePatterns>
 ) => {
     if(req.method === 'POST') {
         const { login, password } = req.body
 
         if(login === 'admin' && password === 'admin') {
-            res.status(200).json( {message: 'OK'} )
+            return res.status(200).json({ message: "User Successfully Connected (200)" })
         }
-        return res.status(400).json( {error: 'Bad request'} )
+        return res.status(400).json({ error: "Bad request (400)" })
     }
-    return res.status(405).json( {error: 'Method not allowed'} )
+    return res.status(405).json({ error: "Method not allowed (405)" })
 }
+
+export default mongoDbConnect(loginEndpoint)
