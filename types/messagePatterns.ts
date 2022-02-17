@@ -1,4 +1,4 @@
-export type messagePatterns = {
+export type MessagePatterns = {
     message?: string,
     error?: string
 }
