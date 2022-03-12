@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import md5 from "md5";
 import nc from "next-connect";
+import type { NextApiRequest, NextApiResponse } from "next";
 import type { MessagePatterns } from "../../types/MessagePatterns";
 import type { RegisterRequest } from "../../types/RegisterRequest";
 import { UserModels } from "../../models/UserModels";
