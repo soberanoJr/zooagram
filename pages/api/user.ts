@@ -17,7 +17,7 @@ const handler = nc()
                 return res.status(400).json({ error: `User ${user} not found.` });    
             }
 
-            const { name } = req.body;
+            const { name } = req?.body;
             if(name && name.length > 2) {
                 user.name = name;
             }
