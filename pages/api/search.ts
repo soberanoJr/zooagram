@@ -38,7 +38,7 @@ const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<Message
         return res.status(405).json({ error: 'Method not allowed.' });
     } catch(e) {
         console.log(e);
-        return res.status(500).json({ error: `${e}` })
+        return res.status(500).json({ error: `${e}` });
     }
 }
 
