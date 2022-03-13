@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { MessagePatterns } from '../types/MessagePatterns'
 
 export const mongoDbConnect = (handler: NextApiHandler) =>
-    async (req: NextApiRequest, res: NextApiResponse<MessagePatterns>) => {
+    async (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any[]>) => {
         // follow endpoint or next middleware if database is connected
         if(mongoose.connections[0].readyState) {
             return handler(req, res)

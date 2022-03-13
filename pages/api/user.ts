@@ -10,7 +10,7 @@ const handler = nc()
     .use(upload.single('file'))
     .put(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
-            const {userId} = req?.query;
+            const { userId } = req?.query;
             const user = await UserModels.findById(userId);
             
             if(!user) {
@@ -41,7 +41,7 @@ const handler = nc()
             return res.status(400).json({ error: `${e}` });
         }
     })
-    .get(async (req: NextApiRequest, res: NextApiResponse<MessagePatterns>) => {
+    .get(async (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any>) => {
         try {
             // Get user id
             const { userId } = req?.query;

@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import type { MessagePatterns } from '../types/MessagePatterns'
 
 export const jwtTokenValidation = (handler: NextApiHandler) =>
-    (req: NextApiRequest, res: NextApiResponse<MessagePatterns>) => {
+    (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any[]>) => {
         try {
             const { JWT_KEY } = process.env
     
