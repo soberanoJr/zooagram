@@ -17,6 +17,7 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<MessagePat
                     .find({ userId: user._id })
                     .sort({ datetime: -1 });
 
+                console.log(req.query)
                 return res.status(200).json(posts);
             };
         };
