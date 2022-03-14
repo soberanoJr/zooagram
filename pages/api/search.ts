@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { MessagePatterns } from "../../types/MessagePatterns";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
-import { UserModels } from "../../models/UserModels";
+import { UserModel } from "../../models/UserModel";
 
 const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePatterns | any[]>) => {
     try {
         if(req.method === 'GET'){
             if(req?.query?.id){
-                const user = await UserModels.findById(req?.query?.id);
+                const user = await UserModel.findById(req?.query?.id);
                 if(!user){
                     return res.status(400).json({error : 'User not found.'});
                 }
@@ -23,7 +23,7 @@ const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<Message
                 else if(q.length < 2) {
                     return res.status(400).json({ error: 'Enter more than 2 characters.' });
                 }
-                const foundUsers = await UserModels.find({ 
+                const foundUsers = await UserModel.find({ 
                     $or: [
                         { name : { $regex : q, $options : 'i' } }, 
                         { email : { $regex : q, $options : 'i' } } 

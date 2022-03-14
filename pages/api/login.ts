@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { mongoDbConnect } from '../../middlewares/mongoDbConnect'
 import { MessagePatterns } from '../../types/MessagePatterns'
 import { LoginResponse } from '../../types/LoginResponse'
-import { UserModels } from '../../models/UserModels'
+import { UserModel } from '../../models/UserModel'
 
 const loginEndpoint = async (
     req: NextApiRequest,
@@ -18,7 +18,7 @@ const loginEndpoint = async (
 
     if(req.method === 'POST') {
         const { login, password } = req.body
-        const usersFound = await UserModels.find({ email: login, password: md5(password) })
+        const usersFound = await UserModel.find({ email: login, password: md5(password) })
 
         if(usersFound && usersFound.length > 0) {
             const user = usersFound[0]

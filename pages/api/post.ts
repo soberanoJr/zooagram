@@ -4,7 +4,7 @@ import type { MessagePatterns } from "../../types/MessagePatterns";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { upload, cosmicImageUpload } from "../../services/cosmicImageUpload";
-import { UserModels } from "../../models/UserModels";
+import { UserModel } from "../../models/UserModel";
 import { PostModel } from "../../models/PostModel";
 
 const handler = nc()
@@ -12,7 +12,7 @@ const handler = nc()
     .post(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
             const { userId } = req.query;
-            const user = await UserModels.findById(userId);
+            const user = await UserModel.findById(userId);
             const { text } = req.body;
 
             // Send Multer image to Cosmic

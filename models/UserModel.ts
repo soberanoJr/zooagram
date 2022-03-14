@@ -10,4 +10,4 @@ const UserSchema = new Schema({
     posts: { type: Number, default: 0 },
 })
 
-export const UserModels = (mongoose.models.user || mongoose.model('user', UserSchema))
+export const UserModel = (mongoose.models.users || mongoose.model('users', UserSchema))

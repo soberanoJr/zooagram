@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { MessagePatterns } from "../../types/MessagePatterns";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
-import { UserModels } from "../../models/UserModels";
+import { UserModel } from "../../models/UserModel";
 import nc from 'next-connect';
 import {upload, cosmicImageUpload} from '../../services/cosmicImageUpload'
 
@@ -11,7 +11,7 @@ const handler = nc()
     .put(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
             const { userId } = req?.query;
-            const user = await UserModels.findById(userId);
+            const user = await UserModel.findById(userId);
             
             if(!user) {
                 return res.status(400).json({ error: `User ${user} not found.` });    
@@ -32,7 +32,7 @@ const handler = nc()
             }
 
             // Change data at db
-            await UserModels.findByIdAndUpdate({ _id : user._id }, user);
+            await UserModel.findByIdAndUpdate({ _id : user._id }, user);
 
             return res.status(200).json({ message: `User '${user.name}' successfully updated.` });
 
@@ -45,7 +45,7 @@ const handler = nc()
         try {
             // Get user id
             const { userId } = req?.query;
-            const user = await UserModels.findById(userId);
+            const user = await UserModel.findById(userId);
             user.password = null;
     
             return res.status(200).json(user);

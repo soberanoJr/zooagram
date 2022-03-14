@@ -2,14 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { MessagePatterns } from "../../types/MessagePatterns";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
-import { UserModels } from "../../models/UserModels";
+import { UserModel } from "../../models/UserModel";
 import { PostModel } from "../../models/PostModel";
 
 const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any>) => {
     try {
         if(req.method === 'GET') {
             if(req?.query?.userId) {
-                const user = await UserModels.findById(req?.query?.userId);
+                const user = await UserModel.findById(req?.query?.userId);
                 if(!user) {
                     return res.status(400).json({ error: "User not found" });
                 };

@@ -9,4 +9,4 @@ const PostSchema = new Schema({
     likes: { type: Array, required: true, default: [] },
 })
 
-export const PostModel = (mongoose.models.post || mongoose.model('post', PostSchema))
+export const PostModel = (mongoose.models.posts || mongoose.model('posts', PostSchema))

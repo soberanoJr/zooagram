@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { PostModel } from "../../models/PostModel";
-import { UserModels } from "../../models/UserModels";
+import { UserModel } from "../../models/UserModel";
 import type { MessagePatterns } from "../../types/MessagePatterns";
 
 const likeEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePatterns>) => {
@@ -11,14 +11,14 @@ const likeEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePa
             // Get post id
             const { id } = req?.query;
             const post = await PostModel.findById(id);
-            console.log(id, post)
+            console.log(id, post, req.method, req.query)
             if(!post) {
                 return res.status(400).json({error : 'Post not found.'});
             }
 
             // Get user whose liked the post
             const { userId } = req?.query;
-            const user = await UserModels.findById(userId);
+            const user = await UserModel.findById(userId);
             if(!user) {
                 return res.status(400).json({error : 'User not found.'});
             }
