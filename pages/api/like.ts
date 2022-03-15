@@ -9,7 +9,7 @@ const likeEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePa
     try {
         if(req.method === 'PUT') {
             // Get post id
-            const { id } = req?.query;
+            const {id} = req?.query;
             const post = await PostModel.findById(id);
             console.log(id, post, req.method, req.query)
             if(!post) {
@@ -17,7 +17,7 @@ const likeEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePa
             }
 
             // Get user whose liked the post
-            const { userId } = req?.query;
+            const {userId} = req?.query;
             const user = await UserModel.findById(userId);
             if(!user) {
                 return res.status(400).json({error : 'User not found.'});

@@ -11,9 +11,9 @@ const handler = nc()
     .use(upload.single('file'))
     .post(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
-            const { userId } = req.query;
+            const {userId}  = req.query;
             const user = await UserModel.findById(userId);
-            const { text } = req.body;
+            const {text} = req.body;
 
             // Send Multer image to Cosmic
             const image = await cosmicImageUpload(req); 
@@ -31,6 +31,10 @@ const handler = nc()
                 datetime: new Date,
             };
 
+            user.posts++;
+            await UserModel.findByIdAndUpdate({_id : user._id}, user);
+
+            console.log(user.posts);
             await PostModel.create(post);
             return res.status(200).json({ message: "Posted" });
         } catch(e) {

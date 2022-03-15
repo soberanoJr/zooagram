@@ -10,19 +10,19 @@ const handler = nc()
     .use(upload.single('file'))
     .put(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
-            const { userId } = req?.query;
+            const {userId} = req?.query;
             const user = await UserModel.findById(userId);
             
             if(!user) {
                 return res.status(400).json({ error: `User ${user} not found.` });    
             }
 
-            const { name } = req?.body;
+            const {name} = req?.body;
             if(name && name.length > 2) {
                 user.name = name;
             }
 
-            const { file } = req;
+            const {file} = req;
             if(file && file.originalname) {
                 // Send Multer image to Cosmic
                 const image = await cosmicImageUpload(req);
@@ -44,7 +44,7 @@ const handler = nc()
     .get(async (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any>) => {
         try {
             // Get user id
-            const { userId } = req?.query;
+            const {userId} = req?.query;
             const user = await UserModel.findById(userId);
             user.password = null;
     

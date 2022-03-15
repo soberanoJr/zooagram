@@ -15,8 +15,8 @@ const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<Message
                 user.password = null;
                 return res.status(200).json(user);
             } else {
-                const { q } = req.query;
-                console.log(q)
+                const {q} = req.query;
+                console.log(q, req.query)
                 if(!q) {
                     return res.status(400).json({ error: `Missing query. (${q})` });
                 }
