@@ -8,7 +8,7 @@ import { UserModel } from "../../models/UserModel";
 import { PostModel } from "../../models/PostModel";
 
 const handler = nc()
-    .use(upload.single('file'))
+    .use(upload .single('file'))
     .post(async (req: any, res: NextApiResponse<MessagePatterns>) => {
         try {
             const {userId}  = req.query;
