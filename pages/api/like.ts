@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { corsHandler } from "../../middlewares/corsHandler";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { PostModel } from "../../models/PostModel";
@@ -40,4 +41,4 @@ const likeEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePa
     }
 }
 
-export default jwtTokenValidation(mongoDbConnect(likeEndpoint));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(likeEndpoint)));

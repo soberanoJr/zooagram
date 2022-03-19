@@ -3,6 +3,7 @@ import type { MessagePatterns } from "../../types/MessagePatterns";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { UserModel } from "../../models/UserModel";
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePatterns | any[]>) => {
     try {
@@ -42,4 +43,4 @@ const searchEndpoint = async (req : NextApiRequest, res: NextApiResponse<Message
     }
 }
 
-export default jwtTokenValidation(mongoDbConnect(searchEndpoint));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(searchEndpoint)));

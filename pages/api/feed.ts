@@ -5,6 +5,7 @@ import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { UserModel } from "../../models/UserModel";
 import { PostModel } from "../../models/PostModel";
 import { FollowerModel } from "../../models/FollowerModel";
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<MessagePatterns | any>) => {
     try {
@@ -79,4 +80,4 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<MessagePat
         .json({ error: "Missing Feed" });
 };
 
-export default jwtTokenValidation(mongoDbConnect(feedEndpoint));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(feedEndpoint)));

@@ -6,6 +6,7 @@ import type { RegisterRequest } from "../../types/RegisterRequest";
 import { UserModel } from "../../models/UserModel";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { upload, cosmicImageUpload } from "../../services/cosmicImageUpload"
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const handler = nc()
     .use(upload.single('file'))
@@ -54,4 +55,4 @@ const handler = nc()
 
 export const config = { api: { bodyParser: false }};
 
-export default mongoDbConnect(handler);
+export default corsHandler(mongoDbConnect(handler));

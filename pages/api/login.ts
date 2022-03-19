@@ -5,6 +5,7 @@ import { mongoDbConnect } from '../../middlewares/mongoDbConnect'
 import { MessagePatterns } from '../../types/MessagePatterns'
 import { LoginResponse } from '../../types/LoginResponse'
 import { UserModel } from '../../models/UserModel'
+import { corsHandler } from '../../middlewares/corsHandler'
 
 const loginEndpoint = async (
     req: NextApiRequest,
@@ -37,4 +38,4 @@ const loginEndpoint = async (
     return res.status(405).json({ error: "This method is not allowed" })
 }
 
-export default mongoDbConnect(loginEndpoint)
+export default corsHandler(mongoDbConnect(loginEndpoint))

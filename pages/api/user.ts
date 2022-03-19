@@ -5,6 +5,7 @@ import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { UserModel } from "../../models/UserModel";
 import nc from 'next-connect';
 import {upload, cosmicImageUpload} from '../../services/cosmicImageUpload'
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const handler = nc()
     .use(upload.single('file'))
@@ -57,4 +58,4 @@ const handler = nc()
 
 export const config = { api: { bodyParser: false }};
 
-export default jwtTokenValidation(mongoDbConnect(handler));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(handler)));

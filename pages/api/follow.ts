@@ -4,6 +4,7 @@ import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { mongoDbConnect } from "../../middlewares/mongoDbConnect";
 import { UserModel } from "../../models/UserModel";
 import { FollowerModel } from "../../models/FollowerModel";
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const followEndpoint = async (req : NextApiRequest, res: NextApiResponse<MessagePatterns>) => {
     try {
@@ -82,4 +83,4 @@ const followEndpoint = async (req : NextApiRequest, res: NextApiResponse<Message
     }
 }
 
-export default jwtTokenValidation(mongoDbConnect(followEndpoint));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(followEndpoint)));

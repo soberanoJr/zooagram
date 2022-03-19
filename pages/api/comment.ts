@@ -4,6 +4,7 @@ import { jwtTokenValidation } from '../../middlewares/jwtTokenValidation';
 import { PostModel } from '../../models/PostModel';
 import { UserModel } from '../../models/UserModel';
 import type {MessagePatterns} from '../../types/MessagePatterns';
+import { corsHandler } from '../../middlewares/corsHandler';
 
 const commentEndpoint = async (req : NextApiRequest, res : NextApiResponse<MessagePatterns>) => {
     try{
@@ -51,4 +52,4 @@ const commentEndpoint = async (req : NextApiRequest, res : NextApiResponse<Messa
             .status(500).json({error : 'Error adding comment.'});
     }
 }
-export default jwtTokenValidation(mongoDbConnect(commentEndpoint));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(commentEndpoint)));

@@ -6,6 +6,7 @@ import { jwtTokenValidation } from "../../middlewares/jwtTokenValidation";
 import { upload, cosmicImageUpload } from "../../services/cosmicImageUpload";
 import { UserModel } from "../../models/UserModel";
 import { PostModel } from "../../models/PostModel";
+import { corsHandler } from "../../middlewares/corsHandler";
 
 const handler = nc()
     .use(upload .single('file'))
@@ -45,4 +46,4 @@ const handler = nc()
 
 export const config = { api: { bodyParser: false }};
 
-export default jwtTokenValidation(mongoDbConnect(handler));
+export default corsHandler(jwtTokenValidation(mongoDbConnect(handler)));
